@@ -2,6 +2,7 @@ package support;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverFactory {
     //for parallel execution:
@@ -11,7 +12,10 @@ public class DriverFactory {
 
     public static WebDriver getDriver(){
         if(driverThreadLocal.get() == null){
-            driverThreadLocal.set(new ChromeDriver());
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-fullscreen");
+
+            driverThreadLocal.set(new ChromeDriver(options));
         }
         return driverThreadLocal.get();
     }
